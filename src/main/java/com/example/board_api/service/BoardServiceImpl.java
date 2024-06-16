@@ -15,29 +15,20 @@ public class BoardServiceImpl implements BoardService {
     private ResponseDto responseDto;
 
     @Autowired
-    BoardDao bDao;
-//    @Autowired // 의존성 주입 어노테이션?
-//    BoardMapper boardMapper;
+    BoardDao boardDao;
 
     @Override
     public ResponseDto findAll() {
-        responseDto = new ResponseDto();
-        List<BoardDto> responseList = bDao.findAll();
+        responseDto = new ResponseDto(); // response instance 생성
+        List<BoardDto> responseList = boardDao.findAll(); // Mapper 호출
         if(responseList != null) {
             responseDto.setState(true);
             responseDto.setBoardList(responseList);
+            responseDto.setMessage("정상 처리되었습니다.");
         } else {
             responseDto.setState(false);
+            responseDto.setMessage("게시글이 존재하지 않습니다");
         }
         return responseDto;
     }
-
-//    @Override
-//    public List<BoardDto> selectBoardList(){
-//        try {
-//            return boardMapper.findAll();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

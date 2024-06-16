@@ -21,4 +21,8 @@ public class boardDataController {
     public ResponseDto findAll(){
         return boardService.findAll();
     }
+
+    /**
+     * 게시판
+     */
 }

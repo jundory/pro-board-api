@@ -1,10 +1,8 @@
 package com.example.board_api.service;
 
-import com.example.board_api.dto.BoardDto;
-
-import java.util.List;
+import com.example.board_api.dto.ResponseDto;
 
 public interface BoardService {
-    List<BoardDto> selectBoardList();
-//    List<BoardDto> selectBoardList(String userIdx);
+//    List<BoardDto> selectBoardList();
+    ResponseDto findAll();
 }

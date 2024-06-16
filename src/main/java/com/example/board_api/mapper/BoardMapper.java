@@ -7,8 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-
-//    mapper 던지는 곳
     List<BoardDto> findAll();
 
 //    List<BoardDto> selectBoardList(String userId);

@@ -31,4 +31,37 @@ public class BoardServiceImpl implements BoardService {
         }
         return responseDto;
     }
+
+    //이건 위랑 합쳐야겠다..
+    @Override
+    public ResponseDto detailInto(int id) {
+        responseDto = new ResponseDto();
+        List<BoardDto> responseList = boardDao.detailInfo(id);
+        if(responseList != null) {
+            responseDto.setState(true);
+            responseDto.setBoardList(responseList);
+            responseDto.setMessage("정상 처리되었습니다.");
+        } else {
+            responseDto.setState(false);
+            responseDto.setMessage("해당 글이 존재하지 않습니다.");
+        }
+        return responseDto;
+    }
+
+    @Override
+    public ResponseDto addPost(BoardDto post) {
+        responseDto = new ResponseDto();
+        int lastId;
+        lastId = boardDao.getLastId() + 1;
+        List<BoardDto> result = boardDao.addPost(lastId, post);
+        if(result != null){
+            responseDto.setMessage("글 등록이 완료되었습니다.");
+            responseDto.setState(true);
+        }
+        else {
+            responseDto.setState(false);
+            responseDto.setMessage("글 등록에 실패하였습니다");
+        }
+        return responseDto;
+    }
 }

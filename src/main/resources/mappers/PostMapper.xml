@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.board_api.mapper.BoardMapper">
     <select id="findAll">
-        select * from board
+        select *
+        from board
+        order by id desc
     </select>
+    <select id="detailInfo" parameterType="int">
+        select *
+        from board
+        where id=#{id}
+    </select>
+    <select id="lastId">
+        select id
+        from board
+        order by id desc
+        limit 1
+    </select>
+
+    <insert id="addPost">
+        insert into board (id, title, content)
+        values (#{id}, #{post.title}, #{post.content})
+    </insert>
 </mapper>

@@ -8,6 +8,9 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     List<BoardDto> findAll();
+    List<BoardDto> detailInfo(int id);
+    int lastId();
+    List<BoardDto> addPost(int id, BoardDto post);
 
 //    List<BoardDto> selectBoardList(String userId);
 

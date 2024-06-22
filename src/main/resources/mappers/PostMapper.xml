@@ -18,8 +18,8 @@
         limit 1
     </select>
 
-    <insert id="addPost">
+    <insert id="save" parameterType="map">
         insert into board (id, title, content)
-        values (#{id}, #{post.title}, #{post.content})
+        values (#{id}, #{title}, #{content})
     </insert>
 </mapper>

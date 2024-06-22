@@ -3,10 +3,10 @@ package com.example.board_api.service;
 import com.example.board_api.dao.BoardDao;
 import com.example.board_api.dto.BoardDto;
 import com.example.board_api.dto.ResponseDto;
-import com.example.board_api.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 //service 해당 클래스가 서비스 클래스라는 것을 알려줌.
@@ -34,7 +34,7 @@ public class BoardServiceImpl implements BoardService {
 
     //이건 위랑 합쳐야겠다..
     @Override
-    public ResponseDto detailInto(int id) {
+    public ResponseDto detailInfo(int id) {
         responseDto = new ResponseDto();
         List<BoardDto> responseList = boardDao.detailInfo(id);
         if(responseList != null) {
@@ -49,12 +49,14 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public ResponseDto addPost(BoardDto post) {
+    public ResponseDto addPost(HashMap<String, String> post) {
         responseDto = new ResponseDto();
-        int lastId;
-        lastId = boardDao.getLastId() + 1;
-        List<BoardDto> result = boardDao.addPost(lastId, post);
-        if(result != null){
+        int lastId = boardDao.getLastId() + 1;
+        String title = post.get("title");
+        String content = post.get("contents");
+        int state = boardDao.save(lastId, title, content);
+        System.out.println(state);
+        if(state == 1){
             responseDto.setMessage("글 등록이 완료되었습니다.");
             responseDto.setState(true);
         }

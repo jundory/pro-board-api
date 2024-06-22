@@ -1,10 +1,11 @@
 package com.example.board_api.controller;
 
-import com.example.board_api.dto.BoardDto;
 import com.example.board_api.dto.ResponseDto;
 import com.example.board_api.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -26,14 +27,14 @@ public class boardDataController {
      */
     @GetMapping("/detail/{id}")
     public ResponseDto detailInfo(@PathVariable int id) {
-        return boardService.detailInto(id);
+        return boardService.detailInfo(id);
     }
 
     /**
      * 게시판 글 쓰기
      */
-    @PostMapping("/addPost")
-    public ResponseDto addPost(@RequestBody BoardDto post) {
+    @PutMapping("/addPost")
+    public ResponseDto addPost(@RequestBody HashMap<String, String> post) {
         System.out.println(post);
         return boardService.addPost(post);
     }

@@ -1,10 +1,11 @@
 package com.example.board_api.service;
 
-import com.example.board_api.dto.BoardDto;
 import com.example.board_api.dto.ResponseDto;
+
+import java.util.HashMap;
 
 public interface BoardService {
     ResponseDto findAll();
-    ResponseDto detailInto(int id);
-    ResponseDto addPost(BoardDto post);
+    ResponseDto detailInfo(int id);
+    ResponseDto addPost(HashMap<String, String> post);
 }

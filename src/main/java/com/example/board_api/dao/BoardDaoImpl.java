@@ -25,8 +25,8 @@ public class BoardDaoImpl implements BoardDao{
         return boardMapper.detailInfo(id);
     }
     @Override
-    public List<BoardDto> addPost(int id, BoardDto post){
-        return boardMapper.addPost(id, post);
+    public int save(int id, String title, String content){
+        return boardMapper.save(id, title, content);
     }
 
 }

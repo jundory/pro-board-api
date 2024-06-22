@@ -2,6 +2,7 @@ package com.example.board_api.mapper;
 
 import com.example.board_api.dto.BoardDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface BoardMapper {
     List<BoardDto> findAll();
     List<BoardDto> detailInfo(int id);
     int lastId();
-    List<BoardDto> addPost(int id, BoardDto post);
+    int save(@Param("id") int id, @Param("title") String title, @Param("content") String content);
 
 //    List<BoardDto> selectBoardList(String userId);
 

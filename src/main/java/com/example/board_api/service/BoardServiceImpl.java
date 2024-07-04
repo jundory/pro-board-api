@@ -1,69 +1,86 @@
 package com.example.board_api.service;
 
 import com.example.board_api.dao.BoardDao;
-import com.example.board_api.dto.BoardDto;
+import com.example.board_api.dto.BoardDTO;
+import com.example.board_api.dto.BoardListDTO;
 import com.example.board_api.dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
-//service 해당 클래스가 서비스 클래스라는 것을 알려줌.
 @Service
 public class BoardServiceImpl implements BoardService {
-    private ResponseDto responseDto;
 
     @Autowired
     BoardDao boardDao;
 
     @Override
-    public ResponseDto findAll() {
-        responseDto = new ResponseDto(); // response instance 생성
-        List<BoardDto> responseList = boardDao.findAll(); // Mapper 호출
-        if(responseList != null) {
-            responseDto.setState(true);
-            responseDto.setBoardList(responseList);
-            responseDto.setMessage("정상 처리되었습니다.");
-        } else {
-            responseDto.setState(false);
-            responseDto.setMessage("게시글이 존재하지 않습니다");
+    public ResponseEntity<?> findAll() {
+        try {
+            List<BoardListDTO> boardList = boardDao.findAll(); // Mapper 호출
+            Boolean state = false;
+            String message = "게시글이 존재하지 않습니다.";
+
+            if (boardList.size() != 0) {
+                state = true;
+                message = "조회 완료";
+            }
+
+            ResponseDto result = ResponseDto.builder()
+                    .state(state)
+                    .data(boardList)
+                    .message(message)
+                    .build();
+            return ResponseEntity.ok(result);
         }
-        return responseDto;
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     //이건 위랑 합쳐야겠다..
     @Override
-    public ResponseDto detailInfo(int id) {
-        responseDto = new ResponseDto();
-        List<BoardDto> responseList = boardDao.detailInfo(id);
-        if(responseList != null) {
-            responseDto.setState(true);
-            responseDto.setBoardList(responseList);
-            responseDto.setMessage("정상 처리되었습니다.");
-        } else {
-            responseDto.setState(false);
-            responseDto.setMessage("해당 글이 존재하지 않습니다.");
+    public ResponseEntity<?> detailInfo(String boardId) {
+        try {
+            BoardDTO post = boardDao.detailInfo(boardId);
+            ResponseDto result = ResponseDto.builder()
+                    .state(false)
+                    .message("조회에 실패했습니다")
+                    .build();
+            if (post != null) {
+                result.setState(true);
+                result.setData(post);
+                result.setMessage("정상 처리되었습니다.");
+            }
+            return ResponseEntity.ok(result);
         }
-        return responseDto;
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
-    public ResponseDto addPost(HashMap<String, String> post) {
-        responseDto = new ResponseDto();
-        int lastId = boardDao.getLastId() + 1;
-        String title = post.get("title");
-        String content = post.get("contents");
-        int state = boardDao.save(lastId, title, content);
-        System.out.println(state);
-        if(state == 1){
-            responseDto.setMessage("글 등록이 완료되었습니다.");
-            responseDto.setState(true);
+    public ResponseEntity<?> createBoard(BoardDTO post) {
+        try {
+            BoardDTO postData = BoardDTO.builder()
+                    .userId(post.getUserId())
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .build();
+            int state = boardDao.insertBoard(postData);
+            ResponseDto result = ResponseDto.builder().message("등록이 완료되었습니다").state(true).build();
+            //실패 시
+            if (state != 1) {
+                result.setMessage("등록에 실패했습니다.");
+                result.setState(false);
+            }
+            return ResponseEntity.ok(result);
         }
-        else {
-            responseDto.setState(false);
-            responseDto.setMessage("글 등록에 실패하였습니다");
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return responseDto;
     }
 }

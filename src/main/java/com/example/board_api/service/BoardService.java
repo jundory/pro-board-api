@@ -1,11 +1,10 @@
 package com.example.board_api.service;
 
-import com.example.board_api.dto.ResponseDto;
-
-import java.util.HashMap;
+import com.example.board_api.dto.BoardDTO;
+import org.springframework.http.ResponseEntity;
 
 public interface BoardService {
-    ResponseDto findAll();
-    ResponseDto detailInfo(int id);
-    ResponseDto addPost(HashMap<String, String> post);
+    ResponseEntity<?> findAll();
+    ResponseEntity<?> detailInfo(String boardId);
+    ResponseEntity<?> createBoard(BoardDTO post);
 }

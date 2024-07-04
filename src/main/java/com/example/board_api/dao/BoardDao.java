@@ -1,13 +1,12 @@
 package com.example.board_api.dao;
 
-import com.example.board_api.dto.BoardDto;
+import com.example.board_api.dto.BoardDTO;
+import com.example.board_api.dto.BoardListDTO;
 
 import java.util.List;
 
 public interface BoardDao {
-    public int getLastId();
-    public List<BoardDto> findAll();
-    public List<BoardDto> detailInfo(int id);
-    public int save(int id, String title, String content);
-
+    public List<BoardListDTO> findAll();
+    public BoardDTO detailInfo(String boardId);
+    public int insertBoard(BoardDTO post);
 }

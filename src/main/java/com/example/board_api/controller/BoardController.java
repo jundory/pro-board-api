@@ -21,18 +21,17 @@ public class BoardController {
         return boardService.findAll();
     }
 
-//    /**
-//     * 게시판 상세 조회
-//     */
+    /**
+     * 게시판 상세 조회
+     */
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> detailInfo(@PathVariable String id) {
-        System.out.println(id);
         return boardService.detailInfo(id);
     }
 
-//    /**
-//     * 게시판 글 쓰기
-//     */
+    /**
+     * 게시판 글 쓰기
+     */
     @PostMapping("/save")
     public ResponseEntity<?> createBoard(@RequestBody BoardDTO post) {
         return boardService.createBoard(post);

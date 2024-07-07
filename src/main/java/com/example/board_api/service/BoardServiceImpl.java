@@ -66,7 +66,7 @@ public class BoardServiceImpl implements BoardService {
     public ResponseEntity<?> createBoard(BoardDTO post) {
         try {
             BoardDTO postData = BoardDTO.builder()
-                    .userId(post.getUserId())
+                    .createdBy(post.getCreatedBy())
                     .title(post.getTitle())
                     .content(post.getContent())
                     .build();

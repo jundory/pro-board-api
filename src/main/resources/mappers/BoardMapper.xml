@@ -21,6 +21,6 @@
 
     <insert id="insertBoard" parameterType="boardDTO">
         insert into board (title, content, view_count, created_by, created_at, modified_by, modified_at)
-        values (#{title}, #{content}, 0, #{userId}, SYSDATE(), null, null)
+        values (#{title}, #{content}, 0, #{createdBy}, SYSDATE(), null, null)
     </insert>
 </mapper>

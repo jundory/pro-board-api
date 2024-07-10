@@ -9,4 +9,5 @@ public interface BoardDao {
     public List<BoardListDTO> findAll();
     public BoardDTO detailInfo(String boardId);
     public int insertBoard(BoardDTO post);
+    public int updateBoard(BoardDTO post);
 }

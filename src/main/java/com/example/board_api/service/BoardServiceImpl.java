@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -63,24 +64,46 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public ResponseEntity<?> createBoard(BoardDTO post) {
+    public ResponseEntity<?> registerBoard(Map<String, String> post) {
         try {
-            BoardDTO postData = BoardDTO.builder()
-                    .createdBy(post.getCreatedBy())
-                    .title(post.getTitle())
-                    .content(post.getContent())
-                    .build();
-            int state = boardDao.insertBoard(postData);
-            ResponseDto result = ResponseDto.builder().message("등록이 완료되었습니다").state(true).build();
-            //실패 시
-            if (state != 1) {
-                result.setMessage("등록에 실패했습니다.");
-                result.setState(false);
+            //글 작성
+            if (post.get("type").equals("created")) {
+                BoardDTO postData = BoardDTO.builder()
+                        .createdBy(convertToInt(post.get("userId")))
+                        .title(post.get("title"))
+                        .content(post.get("content"))
+                        .build();
+                int state = boardDao.insertBoard(postData);
+                ResponseDto result = ResponseDto.builder().message("등록이 완료되었습니다").state(true).build();
+                //실패 시
+                if (state != 1) {
+                    result.setMessage("등록에 실패했습니다.");
+                    result.setState(false);
+                }
+                return ResponseEntity.ok(result);
+            //글 수정
+            } else {
+                BoardDTO postData = BoardDTO.builder()
+                        .boardId(convertToInt(post.get("boardId")))
+                        .modifiedBy(convertToInt(post.get("userId")))
+                        .title(post.get("title"))
+                        .content(post.get("content"))
+                        .build();
+                int state = boardDao.updateBoard(postData);
+                ResponseDto result = ResponseDto.builder().message("수정이 완료되었습니다").state(true).build();
+                //실패 시
+                if (state != 1) {
+                    result.setMessage("수정에 실패했습니다.");
+                    result.setState(false);
+                }
+                return ResponseEntity.ok(result);
             }
-            return ResponseEntity.ok(result);
         }
         catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+    int convertToInt(String keyword){
+        return Integer.parseInt(keyword);
     }
 }

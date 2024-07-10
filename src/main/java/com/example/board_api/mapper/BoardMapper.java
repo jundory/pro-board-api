@@ -12,6 +12,7 @@ public interface BoardMapper {
     List<BoardListDTO> findAll();
     BoardDTO detailInfo(String boardId);
     int insertBoard(BoardDTO post);
+    int updateBoard(BoardDTO post);
 
 //    List<BoardDTO> selectBoardList(String userId);
 

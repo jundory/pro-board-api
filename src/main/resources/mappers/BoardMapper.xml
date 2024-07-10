@@ -6,7 +6,8 @@
                title as title,
                view_count as viewCount,
                user_name as userName,
-               DATE_FORMAT(B.created_at, '%y-%m-%d %H:%i:%s') as createdDate
+               DATE_FORMAT(B.created_at, '%y-%m-%d %H:%i:%s') as createdDate,
+                DATE_FORMAT(B.modified_at, '%y-%m-%d %H:%i:%s') as modifiedDate
         from board B
         left join user U
         on B.created_by = U.user_id
@@ -23,4 +24,11 @@
         insert into board (title, content, view_count, created_by, created_at, modified_by, modified_at)
         values (#{title}, #{content}, 0, #{createdBy}, SYSDATE(), null, null)
     </insert>
+
+    <update id="updateBoard" parameterType="boardDTO">
+        UPDATE board
+        SET title = #{title}, content = #{content}, modified_by = #{modifiedBy}, modified_at = SYSDATE()
+        where board_id = #{boardId}
+    </update>
+
 </mapper>

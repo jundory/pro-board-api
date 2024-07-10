@@ -25,4 +25,9 @@ public class BoardDaoImpl implements BoardDao{
         return boardMapper.insertBoard(post);
     }
 
+    @Override
+    public int updateBoard(BoardDTO post){
+        return boardMapper.updateBoard(post);
+    }
+
 }

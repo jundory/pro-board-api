@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @CrossOrigin(origins = "http://localhost:9000")
 @RestController
 public class BoardController {
@@ -32,8 +34,9 @@ public class BoardController {
     /**
      * 게시판 글 쓰기
      */
-    @PostMapping("/save")
-    public ResponseEntity<?> createBoard(@RequestBody BoardDTO post) {
-        return boardService.createBoard(post);
+    @PostMapping("/register")
+    public ResponseEntity<?> registerBoard(@RequestBody Map<String, String> post) {
+        return boardService.registerBoard(post);
+
     }
 }

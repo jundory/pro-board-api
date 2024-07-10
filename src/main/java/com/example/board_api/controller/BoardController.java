@@ -24,7 +24,7 @@ public class BoardController {
     }
 
     /**
-     * 게시판 상세 조회
+     * 글 상세 조회
      */
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> detailInfo(@PathVariable String id) {
@@ -32,11 +32,18 @@ public class BoardController {
     }
 
     /**
-     * 게시판 글 쓰기
+     * 글 등록 및 수정
      */
     @PostMapping("/register")
     public ResponseEntity<?> registerBoard(@RequestBody Map<String, String> post) {
         return boardService.registerBoard(post);
+    }
 
+    /**
+     * 글 삭제
+     */
+    @DeleteMapping("/remove/{boardId}")
+    public ResponseEntity<?> removeBoard(@PathVariable String boardId) {
+        return boardService.deleteBoard(boardId);
     }
 }

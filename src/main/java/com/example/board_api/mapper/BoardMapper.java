@@ -13,7 +13,7 @@ public interface BoardMapper {
     BoardDTO detailInfo(String boardId);
     int insertBoard(BoardDTO post);
     int updateBoard(BoardDTO post);
-
+    int deleteBoard(String boardId);
 //    List<BoardDTO> selectBoardList(String userId);
 
 //@param ?? @param ??? 이런식으로 타입 지정도 했었음

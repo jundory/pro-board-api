@@ -10,4 +10,5 @@ public interface BoardDao {
     public BoardDTO detailInfo(String boardId);
     public int insertBoard(BoardDTO post);
     public int updateBoard(BoardDTO post);
+    public int deleteBoard(String post);
 }

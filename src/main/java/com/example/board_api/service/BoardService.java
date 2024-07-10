@@ -9,4 +9,6 @@ public interface BoardService {
     ResponseEntity<?> findAll();
     ResponseEntity<?> detailInfo(String boardId);
     ResponseEntity<?> registerBoard(Map<String, String> post);
+
+    ResponseEntity<?> deleteBoard(String boardId);
 }

@@ -103,6 +103,23 @@ public class BoardServiceImpl implements BoardService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @Override
+    public ResponseEntity<?> deleteBoard(String boardId){
+        try{
+            int state = boardDao.deleteBoard(boardId);
+            ResponseDto result = ResponseDto.builder().state(false).message("게시글 삭제에 실패했습니다.").build();
+            if(state == 1){
+                result.setState(true);
+                result.setMessage("게시글을 삭제했습니다.");
+            }
+            return ResponseEntity.ok(result);
+        }
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     int convertToInt(String keyword){
         return Integer.parseInt(keyword);
     }

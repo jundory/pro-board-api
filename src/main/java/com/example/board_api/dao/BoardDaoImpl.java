@@ -29,5 +29,6 @@ public class BoardDaoImpl implements BoardDao{
     public int updateBoard(BoardDTO post){
         return boardMapper.updateBoard(post);
     }
-
+    @Override
+    public int deleteBoard(String post) {return boardMapper.deleteBoard(post); }
 }

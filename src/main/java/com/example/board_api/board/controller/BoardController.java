@@ -1,7 +1,6 @@
-package com.example.board_api.controller;
+package com.example.board_api.board.controller;
 
-import com.example.board_api.dto.BoardDTO;
-import com.example.board_api.service.BoardService;
+import com.example.board_api.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
-package com.example.board_api.dao;
+package com.example.board_api.board.dao;
 
-import com.example.board_api.dto.BoardDTO;
-import com.example.board_api.dto.BoardListDTO;
-import com.example.board_api.mapper.BoardMapper;
+import com.example.board_api.board.dto.BoardDTO;
+import com.example.board_api.board.dto.BoardListDTO;
+import com.example.board_api.board.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

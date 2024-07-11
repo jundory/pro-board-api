@@ -1,6 +1,5 @@
-package com.example.board_api.service;
+package com.example.board_api.board.service;
 
-import com.example.board_api.dto.BoardDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;

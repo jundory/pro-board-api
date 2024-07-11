@@ -1,9 +1,9 @@
-package com.example.board_api.service;
+package com.example.board_api.board.service;
 
-import com.example.board_api.dao.BoardDao;
-import com.example.board_api.dto.BoardDTO;
-import com.example.board_api.dto.BoardListDTO;
-import com.example.board_api.dto.ResponseDto;
+import com.example.board_api.board.dao.BoardDao;
+import com.example.board_api.board.dto.BoardDTO;
+import com.example.board_api.board.dto.BoardListDTO;
+import com.example.board_api.board.dto.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,7 @@ public class BoardServiceImpl implements BoardService {
                 message = "조회 완료";
             }
 
-            ResponseDto result = ResponseDto.builder()
+            ResponseDTO result = ResponseDTO.builder()
                     .state(state)
                     .data(boardList)
                     .message(message)
@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService {
     public ResponseEntity<?> detailInfo(String boardId) {
         try {
             BoardDTO post = boardDao.detailInfo(boardId);
-            ResponseDto result = ResponseDto.builder()
+            ResponseDTO result = ResponseDTO.builder()
                     .state(false)
                     .message("조회에 실패했습니다")
                     .build();
@@ -74,7 +74,7 @@ public class BoardServiceImpl implements BoardService {
                         .content(post.get("content"))
                         .build();
                 int state = boardDao.insertBoard(postData);
-                ResponseDto result = ResponseDto.builder().message("등록이 완료되었습니다").state(true).build();
+                ResponseDTO result = ResponseDTO.builder().message("등록이 완료되었습니다").state(true).build();
                 //실패 시
                 if (state != 1) {
                     result.setMessage("등록에 실패했습니다.");
@@ -90,7 +90,7 @@ public class BoardServiceImpl implements BoardService {
                         .content(post.get("content"))
                         .build();
                 int state = boardDao.updateBoard(postData);
-                ResponseDto result = ResponseDto.builder().message("수정이 완료되었습니다").state(true).build();
+                ResponseDTO result = ResponseDTO.builder().message("수정이 완료되었습니다").state(true).build();
                 //실패 시
                 if (state != 1) {
                     result.setMessage("수정에 실패했습니다.");
@@ -108,7 +108,7 @@ public class BoardServiceImpl implements BoardService {
     public ResponseEntity<?> deleteBoard(String boardId){
         try{
             int state = boardDao.deleteBoard(boardId);
-            ResponseDto result = ResponseDto.builder().state(false).message("게시글 삭제에 실패했습니다.").build();
+            ResponseDTO result = ResponseDTO.builder().state(false).message("게시글 삭제에 실패했습니다.").build();
             if(state == 1){
                 result.setState(true);
                 result.setMessage("게시글을 삭제했습니다.");

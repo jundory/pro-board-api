@@ -1,7 +1,7 @@
-package com.example.board_api.dao;
+package com.example.board_api.board.dao;
 
-import com.example.board_api.dto.BoardDTO;
-import com.example.board_api.dto.BoardListDTO;
+import com.example.board_api.board.dto.BoardDTO;
+import com.example.board_api.board.dto.BoardListDTO;
 
 import java.util.List;
 

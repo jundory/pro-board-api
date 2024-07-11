@@ -1,9 +1,8 @@
-package com.example.board_api.mapper;
+package com.example.board_api.board.mapper;
 
-import com.example.board_api.dto.BoardDTO;
-import com.example.board_api.dto.BoardListDTO;
+import com.example.board_api.board.dto.BoardDTO;
+import com.example.board_api.board.dto.BoardListDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

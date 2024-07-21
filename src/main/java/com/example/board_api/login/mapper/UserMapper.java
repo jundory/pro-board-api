@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-    int registerUser(UserDTO userInfo);
+    void registerUserInfo(UserDTO userInfo);
 
     UserDTO checkUserByEmail(String email);
 }

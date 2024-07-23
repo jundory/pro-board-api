@@ -8,7 +8,7 @@
 </select>
 
     <insert id="registerUserInfo">
-        INSERT INTO user ("user_id", "user_name", "login_id", "password", "email", "created_at")
-        VALUES (${userId},${userName},${loginId},${password},${email},SYSDATE())
+        INSERT INTO user (user_name, login_id, password, email, created_at, modified_by, modified_at)
+        VALUES (#{userName},#{loginId},#{password},#{email},SYSDATE(), null, null)
     </insert>
 </mapper>

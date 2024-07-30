@@ -15,9 +15,19 @@
     </select>
 
     <select id="detailInfo" resultType="boardDTO">
-        select *
-        from board
-        where board_id= #{boardId}
+        select B.board_id as boardId,
+               B.title as title,
+               B.content as content,
+               B.view_count as viewCount,
+               B.created_by as createdBy,
+               B.created_at as createdDate,
+               U.user_name  as userName,
+               B.modified_by as modifiedBy,
+               B.modified_at as modifiedDate
+        from board B
+        left join user U
+        on B.created_by = U.user_id
+        where B.board_id= #{boardId}
     </select>
 
     <insert id="insertBoard" parameterType="boardDTO">

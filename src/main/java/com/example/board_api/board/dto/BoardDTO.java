@@ -21,6 +21,8 @@ public class BoardDTO {
 
     private String createdDate;
 
+    private String userName;
+
     //int는 안 되는 이유 (notion 참고)
     @Nullable
     private Integer modifiedBy;

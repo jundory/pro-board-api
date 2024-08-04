@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+//import static을 통한 가독성 향상
+import static com.example.board_api.common.Utils.convertToInt;
+
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -120,7 +123,7 @@ public class BoardServiceImpl implements BoardService {
         }
     }
 
-    int convertToInt(String keyword){
-        return Integer.parseInt(keyword);
-    }
+//    int convertToInt(String keyword){
+//        return Integer.parseInt(keyword);
+//    }
 }
